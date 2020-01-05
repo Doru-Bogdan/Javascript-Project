@@ -118,6 +118,9 @@ var drawModule = (function () {
   };
 
   var init = function(){
+      var audio = new Audio("audio/audio.mp3");
+      audio.play();
+
       let readStorage = localStorage.getItem("difficulty");
       if (readStorage === "Choose...")
           dificulty = 100;
@@ -126,11 +129,26 @@ var drawModule = (function () {
       else if (readStorage === "Medium")
           dificulty = 100;
       else dificulty = 70;
+      let copyDif = dificulty;
 
       direction = 'down';
       drawSnake();
       createFood();
-      gameloop = setInterval(paint, dificulty);
+      var pressed = false;
+      document.getElementById("btnPause").addEventListener("click", function () {
+         if (pressed) {
+             pressed = false;
+             audio.play();
+             gameloop = setInterval(paint, dificulty);
+         }
+         else {
+             pressed = true;
+             audio.pause();
+             gameloop = clearInterval(gameloop);
+         }
+      });
+      if (!pressed)
+        gameloop = setInterval(paint, dificulty);
   };
 
 
@@ -138,5 +156,4 @@ var drawModule = (function () {
       init : init
     };
 
-    
 }());
