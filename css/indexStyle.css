@@ -1,0 +1,12 @@
+body {
+    /*text-align: center!important;*/
+    display: flex!important;
+    justify-content: center;
+    align-items: center!important;
+}
+
+.form {
+    margin: 50px;
+    width: 500px;
+    height: 500px;
+}
